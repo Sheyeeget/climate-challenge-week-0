@@ -1,4 +1,4 @@
- import streamlit as st
+import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -7,12 +7,12 @@ from utils import load_all_data, filter_data
 st.set_page_config(layout="wide")
 st.title("🌍 Climate Analysis Dashboard: Africa's Journey to COP32")
 
-# Load data once, thanks to caching!
+
 with st.spinner("Loading data..."):
     df = load_all_data()
 
 if not df.empty:
-    # --- Sidebar Filters ---
+   
     st.sidebar.header("Configure Your View")
     all_countries = sorted(df['Country'].unique())
     selected_countries = st.sidebar.multiselect(
@@ -23,10 +23,10 @@ if not df.empty:
         "📅 Select Year Range", min_year, max_year, (min_year, max_year)
     )
     
-    # --- Apply Filters ---
+  
     filtered_df = filter_data(df, selected_countries, year_range)
     
-    # --- Visualization 1: Temperature Trends ---
+
     st.header("📈 Temperature Trends")
     temp_check = st.checkbox("Show Temperature Trends", value=True)
     if temp_check and not filtered_df.empty:
@@ -43,7 +43,7 @@ if not df.empty:
     else:
         st.info("No data available for the selected filters.")
     
-    # --- Visualization 2: Precipitation Distribution ---
+   
     st.header("☔ Precipitation Patterns")
     if st.checkbox("Show Precipitation Boxplot", value=True) and not filtered_df.empty:
         fig, ax = plt.subplots(figsize=(12, 6))
